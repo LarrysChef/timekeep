@@ -39247,6 +39247,17 @@ router2.put("/:id", validate(updateSchema), async (req, res) => {
     return error(res, "Failed to update employee", 500);
   }
 });
+router2.delete("/:id/hard", async (req, res) => {
+  try {
+    const [existing] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
+    if (!existing) return notFound(res, "Employee");
+    await db.delete(employees).where(eq(employees.id, req.params.id));
+    return success(res, { deleted: true, name: `${existing.firstName} ${existing.lastName}` });
+  } catch (err) {
+    console.error("[Employees HARD DELETE]", err);
+    return error(res, "Failed to delete employee", 500);
+  }
+});
 router2.delete("/:id", async (req, res) => {
   try {
     const [existing] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
