@@ -299,30 +299,30 @@ var require_depd = __commonJS({
       Object.defineProperty(obj, prop, descriptor);
     }
     function DeprecationError(namespace, message, stack) {
-      var error3 = new Error();
+      var error2 = new Error();
       var stackString;
-      Object.defineProperty(error3, "constructor", {
+      Object.defineProperty(error2, "constructor", {
         value: DeprecationError
       });
-      Object.defineProperty(error3, "message", {
+      Object.defineProperty(error2, "message", {
         configurable: true,
         enumerable: false,
         value: message,
         writable: true
       });
-      Object.defineProperty(error3, "name", {
+      Object.defineProperty(error2, "name", {
         enumerable: false,
         configurable: true,
         value: "DeprecationError",
         writable: true
       });
-      Object.defineProperty(error3, "namespace", {
+      Object.defineProperty(error2, "namespace", {
         configurable: true,
         enumerable: false,
         value: namespace,
         writable: true
       });
-      Object.defineProperty(error3, "stack", {
+      Object.defineProperty(error2, "stack", {
         configurable: true,
         enumerable: false,
         get: function() {
@@ -335,7 +335,7 @@ var require_depd = __commonJS({
           stackString = val;
         }
       });
-      return error3;
+      return error2;
     }
   }
 });
@@ -5173,11 +5173,11 @@ var require_on_finished = __commonJS({
       var eeMsg;
       var eeSocket;
       var finished = false;
-      function onFinish(error3) {
+      function onFinish(error2) {
         eeMsg.cancel();
         eeSocket.cancel();
         finished = true;
-        callback(error3);
+        callback(error2);
       }
       eeMsg = eeSocket = first([[msg, "end", "finish"]], onFinish);
       function onSocket(socket) {
@@ -5279,16 +5279,16 @@ var require_read = __commonJS({
         }));
       }
       debug("read body");
-      getBody(stream, opts, function(error3, body) {
-        if (error3) {
+      getBody(stream, opts, function(error2, body) {
+        if (error2) {
           var _error;
-          if (error3.type === "encoding.unsupported") {
+          if (error2.type === "encoding.unsupported") {
             _error = createError(415, 'unsupported charset "' + encoding.toUpperCase() + '"', {
               charset: encoding.toLowerCase(),
               type: "charset.unsupported"
             });
           } else {
-            _error = createError(400, error3);
+            _error = createError(400, error2);
           }
           if (stream !== req) {
             unpipe(req);
@@ -14336,17 +14336,17 @@ var require_json = __commonJS({
         return void 0;
       }
     }
-    function normalizeJsonSyntaxError(error3, obj) {
-      var keys = Object.getOwnPropertyNames(error3);
+    function normalizeJsonSyntaxError(error2, obj) {
+      var keys = Object.getOwnPropertyNames(error2);
       for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
         if (key !== "stack" && key !== "message") {
-          delete error3[key];
+          delete error2[key];
         }
       }
-      error3.stack = obj.stack.replace(error3.message, obj.message);
-      error3.message = obj.message;
-      return error3;
+      error2.stack = obj.stack.replace(error2.message, obj.message);
+      error2.message = obj.message;
+      return error2;
     }
     function typeChecker(type) {
       return function checkType(req) {
@@ -18661,13 +18661,13 @@ var require_layer = __commonJS({
       this.regexp.fast_star = path2 === "*";
       this.regexp.fast_slash = path2 === "/" && opts.end === false;
     }
-    Layer.prototype.handle_error = function handle_error(error3, req, res, next) {
+    Layer.prototype.handle_error = function handle_error(error2, req, res, next) {
       var fn = this.handle;
       if (fn.length !== 4) {
-        return next(error3);
+        return next(error2);
       }
       try {
-        fn(error3, req, res, next);
+        fn(error2, req, res, next);
       } catch (err) {
         next(err);
       }
@@ -20536,7 +20536,7 @@ var require_send = __commonJS({
       debug("max-age %d", this._maxage);
       return this;
     }, "send.maxage: pass maxAge as option");
-    SendStream.prototype.error = function error3(status, err) {
+    SendStream.prototype.error = function error2(status, err) {
       if (hasListeners(this, "error")) {
         return this.emit("error", createHttpError(status, err));
       }
@@ -20601,15 +20601,15 @@ var require_send = __commonJS({
       var statusCode = this.res.statusCode;
       return statusCode >= 200 && statusCode < 300 || statusCode === 304;
     };
-    SendStream.prototype.onStatError = function onStatError(error3) {
-      switch (error3.code) {
+    SendStream.prototype.onStatError = function onStatError(error2) {
+      switch (error2.code) {
         case "ENAMETOOLONG":
         case "ENOENT":
         case "ENOTDIR":
-          this.error(404, error3);
+          this.error(404, error2);
           break;
         default:
-          this.error(500, error3);
+          this.error(500, error2);
           break;
       }
     };
@@ -21546,7 +21546,7 @@ var require_ipaddr = __commonJS({
         return new this(octets);
       };
       ipaddr.IPv4.broadcastAddressFromCIDR = function(string) {
-        var cidr, error3, i, ipInterfaceOctets, octets, subnetMaskOctets;
+        var cidr, error2, i, ipInterfaceOctets, octets, subnetMaskOctets;
         try {
           cidr = this.parseCIDR(string);
           ipInterfaceOctets = cidr[0].toByteArray();
@@ -21559,12 +21559,12 @@ var require_ipaddr = __commonJS({
           }
           return new this(octets);
         } catch (error1) {
-          error3 = error1;
+          error2 = error1;
           throw new Error("ipaddr: the address does not have IPv4 CIDR format");
         }
       };
       ipaddr.IPv4.networkAddressFromCIDR = function(string) {
-        var cidr, error3, i, ipInterfaceOctets, octets, subnetMaskOctets;
+        var cidr, error2, i, ipInterfaceOctets, octets, subnetMaskOctets;
         try {
           cidr = this.parseCIDR(string);
           ipInterfaceOctets = cidr[0].toByteArray();
@@ -21577,7 +21577,7 @@ var require_ipaddr = __commonJS({
           }
           return new this(octets);
         } catch (error1) {
-          error3 = error1;
+          error2 = error1;
           throw new Error("ipaddr: the address does not have IPv4 CIDR format");
         }
       };
@@ -23820,7 +23820,7 @@ var require_serve_static = __commonJS({
             forwardError = true;
           });
         }
-        stream.on("error", function error3(err) {
+        stream.on("error", function error2(err) {
           if (forwardError || !(err.statusCode < 500)) {
             next(err);
             return;
@@ -24340,9 +24340,9 @@ var require_main = __commonJS({
           const attrs = _instructions(result, key);
           decrypted = DotenvModule.decrypt(attrs.ciphertext, attrs.key);
           break;
-        } catch (error3) {
+        } catch (error2) {
           if (i + 1 >= length) {
-            throw error3;
+            throw error2;
           }
         }
       }
@@ -24370,13 +24370,13 @@ var require_main = __commonJS({
       let uri;
       try {
         uri = new URL(dotenvKey);
-      } catch (error3) {
-        if (error3.code === "ERR_INVALID_URL") {
+      } catch (error2) {
+        if (error2.code === "ERR_INVALID_URL") {
           const err = new Error("INVALID_DOTENV_KEY: Wrong format. Must be in valid uri format like dotenv://:key_1234@dotenvx.com/vault/.env.vault?environment=development");
           err.code = "INVALID_DOTENV_KEY";
           throw err;
         }
-        throw error3;
+        throw error2;
       }
       const key = uri.password;
       if (!key) {
@@ -24520,10 +24520,10 @@ var require_main = __commonJS({
         const aesgcm = crypto2.createDecipheriv("aes-256-gcm", key, nonce);
         aesgcm.setAuthTag(authTag);
         return `${aesgcm.update(ciphertext)}${aesgcm.final()}`;
-      } catch (error3) {
-        const isRange = error3 instanceof RangeError;
-        const invalidKeyLength = error3.message === "Invalid key length";
-        const decryptionFailed = error3.message === "Unsupported state or unable to authenticate data";
+      } catch (error2) {
+        const isRange = error2 instanceof RangeError;
+        const invalidKeyLength = error2.message === "Invalid key length";
+        const decryptionFailed = error2.message === "Unsupported state or unable to authenticate data";
         if (isRange || invalidKeyLength) {
           const err = new Error("INVALID_DOTENV_KEY: It must be 64 characters long (or more)");
           err.code = "INVALID_DOTENV_KEY";
@@ -24533,7 +24533,7 @@ var require_main = __commonJS({
           err.code = "DECRYPTION_FAILED";
           throw err;
         } else {
-          throw error3;
+          throw error2;
         }
       }
     }
@@ -26042,10 +26042,10 @@ var require_sasl = __commonJS({
     }
     function parseServerFinalMessage(serverData) {
       const attrPairs = parseAttributePairs(serverData);
-      const error3 = attrPairs.get("e");
+      const error2 = attrPairs.get("e");
       const serverSignature = attrPairs.get("v");
-      if (error3) {
-        throw new Error(`SASL: SCRAM-SERVER-FINAL-MESSAGE: server returned error: "${error3}"`);
+      if (error2) {
+        throw new Error(`SASL: SCRAM-SERVER-FINAL-MESSAGE: server returned error: "${error2}"`);
       }
       if (!serverSignature) {
         throw new Error("SASL: SCRAM-SERVER-FINAL-MESSAGE: server signature is missing");
@@ -27744,11 +27744,11 @@ var require_connection = __commonJS({
           }
           self.emit("connect");
         });
-        const reportStreamError = function(error3) {
-          if (self._ending && (error3.code === "ECONNRESET" || error3.code === "EPIPE")) {
+        const reportStreamError = function(error2) {
+          if (self._ending && (error2.code === "ECONNRESET" || error2.code === "EPIPE")) {
             return;
           }
-          self.emit("error", error3);
+          self.emit("error", error2);
         };
         this.stream.on("error", reportStreamError);
         this.stream.on("close", function() {
@@ -27921,8 +27921,8 @@ var require_split2 = __commonJS({
       for (let i = 0; i < list.length; i++) {
         try {
           push(this, this.mapper(list[i]));
-        } catch (error3) {
-          return cb(error3);
+        } catch (error2) {
+          return cb(error2);
         }
       }
       this.overflow = this[kLast].length > this.maxLength;
@@ -27937,8 +27937,8 @@ var require_split2 = __commonJS({
       if (this[kLast]) {
         try {
           push(this, this.mapper(this[kLast]));
-        } catch (error3) {
-          return cb(error3);
+        } catch (error2) {
+          return cb(error2);
         }
       }
       cb();
@@ -28355,19 +28355,19 @@ var require_client = __commonJS({
         });
         this._attachListeners(con);
         con.once("end", () => {
-          const error3 = this._ending ? new Error("Connection terminated") : new Error("Connection terminated unexpectedly");
+          const error2 = this._ending ? new Error("Connection terminated") : new Error("Connection terminated unexpectedly");
           clearTimeout(this.connectionTimeoutHandle);
-          this._errorAllQueries(error3);
+          this._errorAllQueries(error2);
           this._ended = true;
           if (!this._ending) {
             if (this._connecting && !this._connectionError) {
               if (this._connectionCallback) {
-                this._connectionCallback(error3);
+                this._connectionCallback(error2);
               } else {
-                this._handleErrorEvent(error3);
+                this._handleErrorEvent(error2);
               }
             } else if (!this._connectionError) {
-              this._handleErrorEvent(error3);
+              this._handleErrorEvent(error2);
             }
           }
           process.nextTick(() => {
@@ -28381,9 +28381,9 @@ var require_client = __commonJS({
           return;
         }
         return new this._Promise((resolve, reject) => {
-          this._connect((error3) => {
-            if (error3) {
-              reject(error3);
+          this._connect((error2) => {
+            if (error2) {
+              reject(error2);
             } else {
               resolve(this);
             }
@@ -28559,8 +28559,8 @@ var require_client = __commonJS({
       _handleRowDescription(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected rowDescription message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected rowDescription message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleRowDescription(msg);
@@ -28568,8 +28568,8 @@ var require_client = __commonJS({
       _handleDataRow(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected dataRow message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected dataRow message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleDataRow(msg);
@@ -28577,8 +28577,8 @@ var require_client = __commonJS({
       _handlePortalSuspended(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected portalSuspended message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected portalSuspended message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handlePortalSuspended(this.connection);
@@ -28586,8 +28586,8 @@ var require_client = __commonJS({
       _handleEmptyQuery(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected emptyQuery message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected emptyQuery message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleEmptyQuery(this.connection);
@@ -28595,8 +28595,8 @@ var require_client = __commonJS({
       _handleCommandComplete(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected commandComplete message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected commandComplete message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleCommandComplete(msg, this.connection);
@@ -28604,8 +28604,8 @@ var require_client = __commonJS({
       _handleParseComplete() {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected parseComplete message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected parseComplete message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         if (activeQuery.name) {
@@ -28615,8 +28615,8 @@ var require_client = __commonJS({
       _handleCopyInResponse(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected copyInResponse message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected copyInResponse message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleCopyInResponse(this.connection);
@@ -28624,8 +28624,8 @@ var require_client = __commonJS({
       _handleCopyData(msg) {
         const activeQuery = this._getActiveQuery();
         if (activeQuery == null) {
-          const error3 = new Error("Received unexpected copyData message from backend.");
-          this._handleErrorEvent(error3);
+          const error2 = new Error("Received unexpected copyData message from backend.");
+          this._handleErrorEvent(error2);
           return;
         }
         activeQuery.handleCopyData(msg, this.connection);
@@ -28747,11 +28747,11 @@ var require_client = __commonJS({
           const queryCallback = query.callback || (() => {
           });
           const readTimeoutTimer = setTimeout(() => {
-            const error3 = new Error("Query read timeout");
+            const error2 = new Error("Query read timeout");
             process.nextTick(() => {
-              query.handleError(error3, this.connection);
+              query.handleError(error2, this.connection);
             });
-            queryCallback(error3);
+            queryCallback(error2);
             query.callback = () => {
             };
             const index2 = this._queryQueue.indexOf(query);
@@ -29501,9 +29501,9 @@ var require_client2 = __commonJS({
         return;
       }
       return new this._Promise((resolve, reject) => {
-        this._connect((error3) => {
-          if (error3) {
-            reject(error3);
+        this._connect((error2) => {
+          if (error2) {
+            reject(error2);
           } else {
             resolve(this);
           }
@@ -29543,11 +29543,11 @@ var require_client2 = __commonJS({
         queryCallback = query.callback || (() => {
         });
         readTimeoutTimer = setTimeout(() => {
-          const error3 = new Error("Query read timeout");
+          const error2 = new Error("Query read timeout");
           process.nextTick(() => {
-            query.handleError(error3, this.connection);
+            query.handleError(error2, this.connection);
           });
-          queryCallback(error3);
+          queryCallback(error2);
           query.callback = () => {
           };
           const index2 = this._queryQueue.indexOf(query);
@@ -34899,9 +34899,9 @@ var NodePgSession = class _NodePgSession extends PgSession {
       const result = await transaction(tx);
       await tx.execute(sql`commit`);
       return result;
-    } catch (error3) {
+    } catch (error2) {
       await tx.execute(sql`rollback`);
-      throw error3;
+      throw error2;
     } finally {
       if (this.client instanceof Pool2) {
         session.client.release();
@@ -35352,8 +35352,8 @@ var ZodError = class _ZodError extends Error {
       return issue.message;
     };
     const fieldErrors = { _errors: [] };
-    const processError = (error3) => {
-      for (const issue of error3.issues) {
+    const processError = (error2) => {
+      for (const issue of error2.issues) {
         if (issue.code === "invalid_union") {
           issue.unionErrors.map(processError);
         } else if (issue.code === "invalid_return_type") {
@@ -35416,8 +35416,8 @@ var ZodError = class _ZodError extends Error {
   }
 };
 ZodError.create = (issues) => {
-  const error3 = new ZodError(issues);
-  return error3;
+  const error2 = new ZodError(issues);
+  return error2;
 };
 
 // node_modules/zod/v3/locales/en.js
@@ -35681,8 +35681,8 @@ var handleResult = (ctx, result) => {
       get error() {
         if (this._error)
           return this._error;
-        const error3 = new ZodError(ctx.common.issues);
-        this._error = error3;
+        const error2 = new ZodError(ctx.common.issues);
+        this._error = error2;
         return this._error;
       }
     };
@@ -38337,25 +38337,25 @@ var ZodFunction = class _ZodFunction extends ZodType {
       });
       return INVALID;
     }
-    function makeArgsIssue(args, error3) {
+    function makeArgsIssue(args, error2) {
       return makeIssue({
         data: args,
         path: ctx.path,
         errorMaps: [ctx.common.contextualErrorMap, ctx.schemaErrorMap, getErrorMap(), en_default].filter((x) => !!x),
         issueData: {
           code: ZodIssueCode.invalid_arguments,
-          argumentsError: error3
+          argumentsError: error2
         }
       });
     }
-    function makeReturnsIssue(returns, error3) {
+    function makeReturnsIssue(returns, error2) {
       return makeIssue({
         data: returns,
         path: ctx.path,
         errorMaps: [ctx.common.contextualErrorMap, ctx.schemaErrorMap, getErrorMap(), en_default].filter((x) => !!x),
         issueData: {
           code: ZodIssueCode.invalid_return_type,
-          returnTypeError: error3
+          returnTypeError: error2
         }
       });
     }
@@ -38364,15 +38364,15 @@ var ZodFunction = class _ZodFunction extends ZodType {
     if (this._def.returns instanceof ZodPromise) {
       const me = this;
       return OK(async function(...args) {
-        const error3 = new ZodError([]);
+        const error2 = new ZodError([]);
         const parsedArgs = await me._def.args.parseAsync(args, params).catch((e) => {
-          error3.addIssue(makeArgsIssue(args, e));
-          throw error3;
+          error2.addIssue(makeArgsIssue(args, e));
+          throw error2;
         });
         const result = await Reflect.apply(fn, this, parsedArgs);
         const parsedReturns = await me._def.returns._def.type.parseAsync(result, params).catch((e) => {
-          error3.addIssue(makeReturnsIssue(result, e));
-          throw error3;
+          error2.addIssue(makeReturnsIssue(result, e));
+          throw error2;
         });
         return parsedReturns;
       });
@@ -39113,64 +39113,40 @@ function validate(schema, source = "body") {
   };
 }
 
+// src/middleware/auth.ts
+async function auth(req, res, next) {
+  const token = req.headers.authorization?.replace("Bearer ", "");
+  if (!token) {
+    res.status(401).json({ success: false, error: "Missing auth token" });
+    return;
+  }
+  const [session] = await db.select().from(sessions).where(and(eq(sessions.token, token), gt(sessions.expiresAt, /* @__PURE__ */ new Date()))).limit(1);
+  if (!session) {
+    res.status(401).json({ success: false, error: "Invalid or expired token" });
+    return;
+  }
+  req.employeeId = session.employeeId;
+  req.employeeRole = req._employeeRole;
+  next();
+}
+
 // src/routes/auth.ts
 var router = (0, import_express.Router)();
-var loginSchema = external_exports.object({
-  pin: external_exports.string().min(4).max(8)
-});
+var loginSchema = external_exports.object({ pin: external_exports.string().min(4).max(8) });
 router.post("/login", validate(loginSchema), async (req, res) => {
   try {
     const { pin } = req.body;
     const [employee] = await db.select().from(employees).where(and(eq(employees.pin, pin), eq(employees.status, "active"))).limit(1);
     if (!employee) {
-      res.status(401).json({ success: false, error: "Invalid PIN" });
-      return;
+      return error(res, "Invalid PIN", 401);
     }
     const token = import_crypto.default.randomBytes(32).toString("hex");
     const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1e3);
-    await db.insert(sessions).values({
-      employeeId: employee.id,
+    await db.insert(sessions).values({ employeeId: employee.id, token, expiresAt });
+    return success(res, {
       token,
-      expiresAt
-    });
-    res.json({
-      success: true,
-      data: {
-        token,
-        employee: {
-          id: employee.id,
-          firstName: employee.firstName,
-          lastName: employee.lastName,
-          currentState: employee.currentState,
-          role: employee.role
-        }
-      }
-    });
-  } catch (err) {
-    console.error("[Auth] Login error:", err);
-    res.status(500).json({ success: false, error: "Login failed" });
-  }
-});
-router.get("/me", async (req, res) => {
-  try {
-    const token = req.headers.authorization?.replace("Bearer ", "");
-    if (!token) {
-      res.status(401).json({ success: false, error: "Missing token" });
-      return;
-    }
-    const [session] = await db.select().from(sessions).where(eq(sessions.token, token)).limit(1);
-    if (!session || new Date(session.expiresAt) < /* @__PURE__ */ new Date()) {
-      res.status(401).json({ success: false, error: "Invalid or expired token" });
-      return;
-    }
-    const [employee] = await db.select().from(employees).where(eq(employees.id, session.employeeId)).limit(1);
-    if (!employee) {
-      res.status(401).json({ success: false, error: "Employee not found" });
-      return;
-    }
-    res.json({
-      success: true,
-      data: {
+      employee: {
+        id: employee.id,
         firstName: employee.firstName,
         lastName: employee.lastName,
         currentState: employee.currentState,
@@ -39178,20 +39154,33 @@ router.get("/me", async (req, res) => {
       }
     });
   } catch (err) {
-    console.error("[Auth] Me error:", err);
-    res.status(500).json({ success: false, error: "Auth check failed" });
+    console.error("[Auth Login]", err);
+    return error(res, "Login failed", 500);
+  }
+});
+router.get("/me", auth, async (req, res) => {
+  try {
+    const [employee] = await db.select().from(employees).where(eq(employees.id, req.employeeId)).limit(1);
+    if (!employee) return error(res, "Employee not found", 401);
+    return success(res, {
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      currentState: employee.currentState,
+      role: employee.role
+    });
+  } catch (err) {
+    console.error("[Auth Me]", err);
+    return error(res, "Auth check failed", 500);
   }
 });
 router.post("/logout", async (req, res) => {
   try {
     const token = req.headers.authorization?.replace("Bearer ", "");
-    if (token) {
-      await db.delete(sessions).where(eq(sessions.token, token));
-    }
-    res.json({ success: true });
+    if (token) await db.delete(sessions).where(eq(sessions.token, token));
+    return success(res, { ok: true });
   } catch (err) {
-    console.error("[Auth] Logout error:", err);
-    res.status(500).json({ success: false, error: "Logout failed" });
+    console.error("[Auth Logout]", err);
+    return success(res, { ok: true });
   }
 });
 var auth_default = router;
@@ -39199,13 +39188,13 @@ var auth_default = router;
 // src/routes/employees.ts
 var import_express2 = __toESM(require_express2());
 var router2 = (0, import_express2.Router)();
-var createEmployeeSchema = external_exports.object({
-  firstName: external_exports.string().min(1, "First name is required"),
-  lastName: external_exports.string().min(1, "Last name is required"),
+var createSchema = external_exports.object({
+  firstName: external_exports.string().min(1),
+  lastName: external_exports.string().min(1),
   email: external_exports.string().email().optional().nullable(),
   pin: external_exports.string().min(4).max(8).optional().nullable()
 });
-var updateEmployeeSchema = external_exports.object({
+var updateSchema = external_exports.object({
   firstName: external_exports.string().min(1).optional(),
   lastName: external_exports.string().min(1).optional(),
   email: external_exports.string().email().optional().nullable(),
@@ -39214,46 +39203,60 @@ var updateEmployeeSchema = external_exports.object({
   status: external_exports.enum(["active", "inactive"]).optional()
 });
 router2.get("/", async (_req, res) => {
-  const rows = await db.select().from(employees).orderBy(employees.firstName);
-  return success(res, rows);
-});
-router2.get("/active", async (_req, res) => {
-  const rows = await db.select().from(employees).where(eq(employees.status, "active")).orderBy(employees.firstName);
-  return success(res, rows);
+  try {
+    const rows = await db.select().from(employees).orderBy(employees.firstName);
+    return success(res, rows);
+  } catch (err) {
+    console.error("[Employees GET]", err);
+    return error(res, "Failed to load employees", 500);
+  }
 });
 router2.get("/:id", async (req, res) => {
-  const [employee] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
-  if (!employee) return notFound(res, "Employee");
-  return success(res, employee);
+  try {
+    const [emp] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
+    if (!emp) return notFound(res, "Employee");
+    return success(res, emp);
+  } catch (err) {
+    console.error("[Employees GET/:id]", err);
+    return error(res, "Failed to load employee", 500);
+  }
 });
-router2.post("/", validate(createEmployeeSchema), async (req, res) => {
-  const { firstName, lastName, email, pin } = req.body;
-  const [employee] = await db.insert(employees).values({
-    firstName,
-    lastName,
-    email: email || null,
-    pin: pin || null
-  }).returning();
-  return success(res, employee, 201);
+router2.post("/", validate(createSchema), async (req, res) => {
+  try {
+    const { firstName, lastName, email, pin } = req.body;
+    const [emp] = await db.insert(employees).values({ firstName, lastName, email: email || null, pin: pin || null }).returning();
+    return success(res, emp, 201);
+  } catch (err) {
+    console.error("[Employees POST]", err);
+    return error(res, "Failed to create employee", 500);
+  }
 });
-router2.put("/:id", validate(updateEmployeeSchema), async (req, res) => {
-  const [existing] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
-  if (!existing) return notFound(res, "Employee");
-  const updateData = { updatedAt: /* @__PURE__ */ new Date() };
-  if (req.body.firstName !== void 0) updateData.firstName = req.body.firstName;
-  if (req.body.lastName !== void 0) updateData.lastName = req.body.lastName;
-  if (req.body.email !== void 0) updateData.email = req.body.email;
-  if (req.body.pin !== void 0) updateData.pin = req.body.pin;
-  if (req.body.role !== void 0) updateData.role = req.body.role;
-  if (req.body.status !== void 0) updateData.status = req.body.status;
-  const [employee] = await db.update(employees).set(updateData).where(eq(employees.id, req.params.id)).returning();
-  return success(res, employee);
+router2.put("/:id", validate(updateSchema), async (req, res) => {
+  try {
+    const [existing] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
+    if (!existing) return notFound(res, "Employee");
+    const patch = { updatedAt: /* @__PURE__ */ new Date() };
+    const allowed = ["firstName", "lastName", "email", "pin", "role", "status"];
+    for (const key of allowed) {
+      if (req.body[key] !== void 0) patch[key] = req.body[key];
+    }
+    const [emp] = await db.update(employees).set(patch).where(eq(employees.id, req.params.id)).returning();
+    return success(res, emp);
+  } catch (err) {
+    console.error("[Employees PUT]", err);
+    return error(res, "Failed to update employee", 500);
+  }
 });
 router2.delete("/:id", async (req, res) => {
-  const [existing] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
-  if (!existing) return notFound(res, "Employee");
-  await db.update(employees).set({ status: "inactive", updatedAt: /* @__PURE__ */ new Date() }).where(eq(employees.id, req.params.id));
-  return success(res, { deactivated: true });
+  try {
+    const [existing] = await db.select().from(employees).where(eq(employees.id, req.params.id)).limit(1);
+    if (!existing) return notFound(res, "Employee");
+    await db.update(employees).set({ status: "inactive", updatedAt: /* @__PURE__ */ new Date() }).where(eq(employees.id, req.params.id));
+    return success(res, { deactivated: true });
+  } catch (err) {
+    console.error("[Employees DELETE]", err);
+    return error(res, "Failed to deactivate employee", 500);
+  }
 });
 var employees_default = router2;
 
@@ -39302,23 +39305,6 @@ var chips_default = router3;
 // src/routes/punches.ts
 var import_express4 = __toESM(require_express2());
 
-// src/middleware/auth.ts
-async function auth(req, res, next) {
-  const token = req.headers.authorization?.replace("Bearer ", "");
-  if (!token) {
-    res.status(401).json({ success: false, error: "Missing auth token" });
-    return;
-  }
-  const [session] = await db.select().from(sessions).where(and(eq(sessions.token, token), gt(sessions.expiresAt, /* @__PURE__ */ new Date()))).limit(1);
-  if (!session) {
-    res.status(401).json({ success: false, error: "Invalid or expired token" });
-    return;
-  }
-  req.employeeId = session.employeeId;
-  req.employeeRole = req._employeeRole;
-  next();
-}
-
 // src/services/punch-service.ts
 var MIN_PUNCH_GAP_MS = 5e3;
 async function receiveNfcPunch(input) {
@@ -39336,7 +39322,7 @@ async function receiveNfcPunch(input) {
     return normalized === normalizedInput || normalized.includes(normalizedInput) || normalizedInput.includes(normalized);
   });
   if (!chip) {
-    return { error: `Unknown chip (${input.chipUid}). Please use a valid time clock.` };
+    return { error: `Chip not registered. Add this UID in admin \u2192 Chips: ${input.chipUid}` };
   }
   const parsedTime = new Date(input.timestamp);
   if (employee.lastPunchAt) {
@@ -39462,70 +39448,78 @@ var manualPunchSchema = external_exports.object({
   createdBy: external_exports.string().uuid()
 });
 router4.post("/nfc", auth, validate(nfcPunchSchema), async (req, res) => {
-  const result = await receiveNfcPunch({
-    employeeId: req.employeeId,
-    chipUid: req.body.chipUid,
-    timestamp: req.body.timestamp
-  });
-  if ("error" in result) return error(res, result.error);
-  return success(res, result);
+  try {
+    const result = await receiveNfcPunch({
+      employeeId: req.employeeId,
+      chipUid: req.body.chipUid,
+      timestamp: req.body.timestamp
+    });
+    if ("error" in result) return error(res, result.error, 400);
+    return success(res, result);
+  } catch (err) {
+    console.error("[Punch NFC]", err);
+    return error(res, "Server error recording punch", 500);
+  }
 });
 router4.post("/manual", validate(manualPunchSchema), async (req, res) => {
-  const result = await createManualPunch(req.body);
-  if ("error" in result) return error(res, result.error);
-  return success(res, result);
+  try {
+    const result = await createManualPunch(req.body);
+    if ("error" in result) return error(res, result.error, 400);
+    return success(res, result);
+  } catch (err) {
+    console.error("[Punch Manual]", err);
+    return error(res, "Server error recording punch", 500);
+  }
 });
 router4.get("/mine", auth, async (req, res) => {
-  const { from, to } = req.query;
-  const result = await getEmployeePunches(req.employeeId, from, to);
-  return success(res, result);
+  try {
+    const { from, to } = req.query;
+    const rows = await getEmployeePunches(req.employeeId, from, to);
+    return success(res, rows);
+  } catch (err) {
+    console.error("[Punch Mine]", err);
+    return error(res, "Failed to load punches", 500);
+  }
 });
 router4.get("/mine/weekly", auth, async (req, res) => {
-  const { week } = req.query;
-  if (week) {
-    const summary = await getEmployeeWeeklyHours(req.employeeId, week);
-    return success(res, summary);
+  try {
+    const { week } = req.query;
+    if (week) {
+      const summary = await getEmployeeWeeklyHours(req.employeeId, week);
+      return success(res, summary);
+    }
+    const labels = recentWeekLabels(5);
+    const weeks = await Promise.all(labels.map((l) => getEmployeeWeeklyHours(req.employeeId, l)));
+    return success(res, weeks);
+  } catch (err) {
+    console.error("[Punch Mine Weekly]", err);
+    return error(res, "Failed to load weekly hours", 500);
   }
-  const labels = recentWeekLabels(5);
-  const weeks = [];
-  for (const label of labels) {
-    const summary = await getEmployeeWeeklyHours(req.employeeId, label);
-    weeks.push(summary);
-  }
-  return success(res, weeks);
 });
 router4.get("/:employeeId", async (req, res) => {
-  const { from, to } = req.query;
-  const punches2 = await getEmployeePunches(req.params.employeeId, from, to);
-  return success(res, punches2);
+  try {
+    const { from, to } = req.query;
+    const rows = await getEmployeePunches(req.params.employeeId, from, to);
+    return success(res, rows);
+  } catch (err) {
+    console.error("[Punch Get]", err);
+    return error(res, "Failed to load punches", 500);
+  }
 });
 router4.get("/:employeeId/weekly", async (req, res) => {
-  const { week } = req.query;
-  if (week) {
-    const summary = await getEmployeeWeeklyHours(req.params.employeeId, week);
-    return success(res, summary);
+  try {
+    const { week } = req.query;
+    if (week) {
+      const summary = await getEmployeeWeeklyHours(req.params.employeeId, week);
+      return success(res, summary);
+    }
+    const labels = recentWeekLabels(5);
+    const weeks = await Promise.all(labels.map((l) => getEmployeeWeeklyHours(req.params.employeeId, l)));
+    return success(res, weeks);
+  } catch (err) {
+    console.error("[Punch Weekly]", err);
+    return error(res, "Failed to load weekly hours", 500);
   }
-  const labels = recentWeekLabels(5);
-  const weeks = [];
-  for (const label of labels) {
-    const summary = await getEmployeeWeeklyHours(req.params.employeeId, label);
-    weeks.push(summary);
-  }
-  return success(res, weeks);
-});
-router4.get("/mine/weekly", auth, async (req, res) => {
-  const { week } = req.query;
-  if (week) {
-    const summary = await getEmployeeWeeklyHours(req.employeeId, week);
-    return success(res, summary);
-  }
-  const labels = recentWeekLabels(5);
-  const weeks = [];
-  for (const label of labels) {
-    const summary = await getEmployeeWeeklyHours(req.employeeId, label);
-    weeks.push(summary);
-  }
-  return success(res, weeks);
 });
 var punches_default = router4;
 
